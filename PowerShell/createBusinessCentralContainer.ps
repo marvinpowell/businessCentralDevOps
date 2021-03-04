@@ -1,0 +1,13 @@
+$bcArtifactUrl = Get-BCArtifactUrl -type OnPrem -version "17.4" -country w1
+$bcImageName = New-BcImage -artifactUrl $bcArtifactUrl -skipIfImageAlreadyExists
+$bcContainerName = 'bc17.4'
+New-BCContainer -accept_eula `
+    -accept_outdated `
+    -containerName $bcContainerName `
+    -artifactUrl $bcArtifactUrl `
+    -imageName $bcImageName `
+    -auth NavUserPassword `
+    -updateHosts `
+    -memoryLimit 8g `
+    -includeAL `
+    -includeTestToolkit 
